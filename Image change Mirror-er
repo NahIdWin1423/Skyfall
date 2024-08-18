@@ -16,3 +16,18 @@
         const imageInput = document.getElementById('imageInput');
         const image1 = document.getElementById('image1');
         const image2 = document.getElementById('image2');
+
+        imageInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    image1.src = event.target.result;
+                    image2.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
