@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Synchronization</title>
+    <style>
+        #box1, #box2 {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            position: absolute;
+        }
+        #box2 {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1"></div>
+    <div id="box2"></div>
+
+    <script>
+        const box1 = document.getElementById('box1');
+        const box2 = document.getElementById('box2');
+
+        box1.onmousedown = function(event) {
+            const shiftX = event.clientX - box1.getBoundingClientRect().left;
+            const shiftY = event.clientY - box1.getBoundingClientRect().top;
+
+            function moveAt(pageX, pageY) {
+                box1.style.left = pageX - shiftX + 'px';
+                box1.style.top = pageY - shiftY + 'px';
+                box2.style.left = box1.style.left;
+                box2.style.top = box1.style.top;
+            }
+
+            function onMouseMove(event) {
+                moveAt(event.pageX, event.pageY);
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+
+            box1.onmouseup = function() {
+                document.removeEventListener('mousemove', onMouseMove);
+                box1.onmouseup = null;
+            };
+        };
+
+        box1.ondragstart = function() {
+            return false;
+        };
+    </script>
+</body>
+</html>
