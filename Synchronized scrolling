@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synchronized Scrolling</title>
+    <style>
+        #section1, #section2 {
+            width: 45%;
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid black;
+            display: inline-block;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="section1">
+        <p>Content for Section 1</p>
+        <p>More content...</p>
+        <p>Even more content...</p>
+        <p>Keep scrolling...</p>
+        <p>Almost there...</p>
+        <p>You've reached the end!</p>
+    </div>
+    <div id="section2">
+        <p>Content for Section 2</p>
+        <p>More content...</p>
+        <p>Even more content...</p>
+        <p>Keep scrolling...</p>
+        <p>Almost there...</p>
+        <p>You've reached the end!</p>
+    </div>
+
+    <script>
+        const section1 = document.getElementById('section1');
+        const section2 = document.getElementById('section2');
+
+        section1.addEventListener('scroll', function() {
+            section2.scrollTop = section1.scrollTop;
+        });
+
+        section2.addEventListener('scroll', function() {
+            section1.scrollTop = section2.scrollTop;
+        });
+    </script>
+</body>
+</html>
